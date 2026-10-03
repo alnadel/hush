@@ -1,0 +1,16 @@
+asset_id,family,states,source_size_or_format,pivot,frame_plan,export,license_provenance,status
+walker,character,sleep_walk;stir;near_wake;wake;bed_safe,160x224,feet center,8/4/4/6/4,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+sleeper,character,calm;stir;near_wake;wake,256x192,bed center,4/4/4/6,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+duck,prop,idle;selected;stepped,128x128,center,1/1/4,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+cushion,prop,floor;held;loaded;wedged;4 cosmetic fabrics,192x112,center,1 per state,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+train,prop,idle;rolling;braked;docked,320x144,carriage anchor,1/4/1/1,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+cup,prop,stable;wobble;tip;fall;caught;broken,96x128,base center,1/6/4/1/1/1,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+window,prop,calm;gust;held;wedged,224x240,latch anchor,1/4/1/1,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+rug,prop,floor;held,224x144,center,1/1,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+door,prop,closed;opening;open;wedged,256x320,hinge,model-driven transform,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+room_chapters,background,4 coherent chapter backgrounds,1200x1422,top left,1 each,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+ui_icons,ui,start;pause;retry;home;hint;settings;sound;haptic;badge;lock,96x96,center,1 each,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+noise_effects,vfx,ordinary;covered;crash;socket;success,256x256,center,code-driven preferred,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+audio_props,audio,duck;catch;crash;release;rolling;window;door;snore,48kHz mono WAV source,not applicable,short events and seamless loops,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+audio_ui,audio,tap;success;wake,48kHz mono WAV source,not applicable,one each,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED
+ambience_music,audio,room ambience;optional music,48kHz stereo WAV source,not applicable,loop with clean endpoints,Transparent PNG sprite or engine vector; compressed audio import for runtime,REQUIRED before shipping,PLACEHOLDER OR NOT CREATED

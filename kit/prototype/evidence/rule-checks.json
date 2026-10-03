@@ -1,0 +1,8 @@
+[
+  "Holding freezes cup progress; release resumes it; a second hand is rejected.",
+  "The cushion wedges the window and can be retrieved.",
+  "Pause freezes the room; resuming releases a held train without leaving a free permanent brake.",
+  "A loaded cushion follows the moving carriage.",
+  "Sound masking applies when a noise happens and cannot erase previous noise.",
+  "Distinct solutions and the intended failure cases pass."
+]

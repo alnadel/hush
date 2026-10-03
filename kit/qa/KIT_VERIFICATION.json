@@ -1,0 +1,17 @@
+{
+  "checked_on": "2026-10-03",
+  "scope": "BRD and supplied reference kit only; native game not yet built",
+  "checks": {
+    "reference_scenarios": 8,
+    "original_rule_groups": 6,
+    "invalid_data_rejection_cases": 10,
+    "requirements_mapped_to_acceptance_cases": 25,
+    "all_kit_json_parse": true,
+    "markdown_word_content_parity": true,
+    "rendered_docx_pages_reviewed": 27
+  },
+  "limitations": [
+    "Historical browser touch/mouse report is included; not rerun as a native test.",
+    "No Godot project, signed mobile build, completed human playtest or final production assets are claimed."
+  ]
+}

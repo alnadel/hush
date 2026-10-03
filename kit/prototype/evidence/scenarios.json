@@ -1,0 +1,220 @@
+{
+  "Prepared chain": {
+    "state": "won",
+    "time": 15.008,
+    "caught": 2,
+    "noise": 38.12,
+    "hidden": 129.33,
+    "windowNoise": 0,
+    "peakWalker": 46.26,
+    "peakSleeper": 33.28,
+    "reason": "",
+    "events": [
+      {
+        "t": 6,
+        "label": "Train released",
+        "masked": true,
+        "q": 9.28
+      },
+      {
+        "t": 9,
+        "label": "Cup A caught",
+        "masked": false,
+        "q": 5
+      },
+      {
+        "t": 12,
+        "label": "Cup B caught",
+        "masked": true,
+        "q": 0.8
+      }
+    ]
+  },
+  "No intervention": {
+    "state": "lost",
+    "time": 9,
+    "caught": 0,
+    "noise": 202.3,
+    "hidden": 31.5,
+    "windowNoise": 29.2,
+    "peakWalker": 170.06,
+    "peakSleeper": 109.83,
+    "reason": "The walker woke. Cup A hit the floor",
+    "events": [
+      {
+        "t": 2.533,
+        "label": "Stepped on the duck",
+        "masked": true,
+        "q": 58.5
+      },
+      {
+        "t": 9,
+        "label": "Cup A hit the floor",
+        "masked": false,
+        "q": 115
+      }
+    ]
+  },
+  "Skip the window": {
+    "state": "lost",
+    "time": 10.15,
+    "caught": 1,
+    "noise": 120.52,
+    "hidden": 124.54,
+    "windowNoise": 84.4,
+    "peakWalker": 100.21,
+    "peakSleeper": 74.83,
+    "reason": "The walker woke. Window rattled",
+    "events": [
+      {
+        "t": 6,
+        "label": "Train released",
+        "masked": true,
+        "q": 9.28
+      },
+      {
+        "t": 9,
+        "label": "Cup A caught",
+        "masked": false,
+        "q": 5
+      }
+    ]
+  },
+  "Start too early": {
+    "state": "lost",
+    "time": 9,
+    "caught": 0,
+    "noise": 195.5,
+    "hidden": 76.16,
+    "windowNoise": 0.4,
+    "peakWalker": 170.27,
+    "peakSleeper": 116.74,
+    "reason": "The walker woke. Cup A hit the floor",
+    "events": [
+      {
+        "t": 3.6,
+        "label": "Train released",
+        "masked": false,
+        "q": 58
+      },
+      {
+        "t": 9,
+        "label": "Cup A hit the floor",
+        "masked": false,
+        "q": 115
+      }
+    ]
+  },
+  "Recover an early train": {
+    "state": "won",
+    "time": 15.008,
+    "caught": 2,
+    "noise": 69.85,
+    "hidden": 129.6,
+    "windowNoise": 0,
+    "peakWalker": 70.64,
+    "peakSleeper": 50.1,
+    "reason": "",
+    "events": [
+      {
+        "t": 5.6,
+        "label": "Train released",
+        "masked": true,
+        "q": 9.28
+      },
+      {
+        "t": 7.5,
+        "label": "Train restarted",
+        "masked": false,
+        "q": 32
+      },
+      {
+        "t": 9,
+        "label": "Cup A caught",
+        "masked": false,
+        "q": 5
+      },
+      {
+        "t": 12,
+        "label": "Cup B caught",
+        "masked": true,
+        "q": 0.8
+      }
+    ]
+  },
+  "Use the final snore": {
+    "state": "won",
+    "time": 15.008,
+    "caught": 2,
+    "noise": 46.18,
+    "hidden": 171.67,
+    "windowNoise": 50.4,
+    "peakWalker": 50.45,
+    "peakSleeper": 37.36,
+    "reason": "",
+    "events": [
+      {
+        "t": 6,
+        "label": "Train released",
+        "masked": true,
+        "q": 9.28
+      },
+      {
+        "t": 9,
+        "label": "Cup A caught",
+        "masked": false,
+        "q": 5
+      },
+      {
+        "t": 12,
+        "label": "Cup B caught",
+        "masked": true,
+        "q": 0.8
+      }
+    ]
+  },
+  "Cover only one landing": {
+    "state": "lost",
+    "time": 9,
+    "caught": 0,
+    "noise": 131.23,
+    "hidden": 75.29,
+    "windowNoise": 0.4,
+    "peakWalker": 112.18,
+    "peakSleeper": 79.24,
+    "reason": "The walker woke. Cup A hit the floor",
+    "events": [
+      {
+        "t": 9,
+        "label": "Cup A hit the floor",
+        "masked": false,
+        "q": 115
+      }
+    ]
+  },
+  "Manual transfer during final snore": {
+    "state": "won",
+    "time": 15.008,
+    "caught": 2,
+    "noise": 31.42,
+    "hidden": 123.64,
+    "windowNoise": 50.4,
+    "peakWalker": 32.42,
+    "peakSleeper": 25.68,
+    "reason": "",
+    "events": [
+      {
+        "t": 9,
+        "label": "Cup A caught",
+        "masked": false,
+        "q": 5
+      },
+      {
+        "t": 12,
+        "label": "Cup B caught",
+        "masked": true,
+        "q": 0.8
+      }
+    ]
+  }
+}

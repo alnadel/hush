@@ -1,0 +1,12 @@
+const {HardRoom}=require('./core'),assert=require('assert'),fs=require('fs');
+const checks=[];
+let s=new HardRoom();s.start();s.duck.x=150;s.advance(7.8);s.select('cupA');const age=s.cups[0].age;s.advance(.6);assert.equal(s.cups[0].age,age);assert.equal(s.select('window'),false);s.release();s.advance(.2);assert(s.cups[0].age>age);checks.push('Holding freezes cup progress; release resumes it; a second hand is rejected.');
+s=new HardRoom();s.start();s.select('pillow');s.target(50,91);s.advance(1.2);s.release();assert.equal(s.pillow.mode,'wedge');assert(s.braced);s.select('pillow');assert.equal(s.pillow.mode,'floor');assert(!s.braced);checks.push('The cushion wedges the window and can be retrieved.');
+s=new HardRoom();s.start();s.select('train');s.pause();const before=s.t;s.advance(10);assert.equal(s.t,before);assert(!s.train.running);s.start();assert(s.train.running);assert(s.hand===null);checks.push('Pause freezes the room; resuming releases a held train without leaving a free permanent brake.');
+s=new HardRoom();s.start();s.duck.x=150;s.select('pillow');s.target(52,295);s.advance(1.2);s.release();assert.equal(s.pillow.mode,'train');s.select('train');s.release();s.advance(1);assert.equal(s.pillow.x,s.train.x);checks.push('A loaded cushion follows the moving carriage.');
+const a=new HardRoom(),b=new HardRoom();a.start();b.start();b.t=2;a.sound(40,100,200,'test');b.sound(40,100,200,'test');assert(b.noise<a.noise/4);const prior=a.walker.alert;a.t=2;assert.equal(a.walker.alert,prior);checks.push('Sound masking applies when a noise happens and cannot erase previous noise.');
+const scenarios=JSON.parse(fs.readFileSync(__dirname+'/scenarios.json'));
+for(const name of ['Prepared chain','Recover an early train','Manual transfer during final snore'])assert.equal(scenarios[name].state,'won');
+for(const name of ['No intervention','Skip the window','Start too early','Cover only one landing'])assert.equal(scenarios[name].state,'lost');
+checks.push('Distinct solutions and the intended failure cases pass.');
+fs.writeFileSync(__dirname+'/rule-checks.json',JSON.stringify(checks,null,2));console.log(JSON.stringify(checks,null,2));

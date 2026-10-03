@@ -1,0 +1,736 @@
+{
+  "level_id": "hard_room_reference",
+  "level_revision": 1,
+  "ruleset": "prototype_v1",
+  "scheduling": "Apply commands at start of first tick whose elapsed time meets at_seconds, then advance one fixed step. at_tick is a zero-based command boundary, not a step-end index. Stable sequence breaks ties.",
+  "cases": [
+    {
+      "name": "Prepared chain",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 52,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 5.7,
+          "at_tick": 684,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 6,
+          "at_tick": 720,
+          "action": "release",
+          "sequence": 7
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 8
+        },
+        {
+          "at_seconds": 12.66,
+          "at_tick": 1520,
+          "action": "release",
+          "sequence": 9
+        }
+      ],
+      "expected": {
+        "state": "won",
+        "time": 15.008,
+        "caught": 2,
+        "noise": 38.12,
+        "hidden": 129.33,
+        "windowNoise": 0,
+        "peakWalker": 46.26,
+        "peakSleeper": 33.28,
+        "reason": "",
+        "events": [
+          {
+            "t": 6,
+            "label": "Train released",
+            "masked": true,
+            "q": 9.28
+          },
+          {
+            "t": 9,
+            "label": "Cup A caught",
+            "masked": false,
+            "q": 5
+          },
+          {
+            "t": 12,
+            "label": "Cup B caught",
+            "masked": true,
+            "q": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "name": "No intervention",
+      "commands": [],
+      "expected": {
+        "state": "lost",
+        "time": 9,
+        "caught": 0,
+        "noise": 202.3,
+        "hidden": 31.5,
+        "windowNoise": 29.2,
+        "peakWalker": 170.06,
+        "peakSleeper": 109.83,
+        "reason": "The walker woke. Cup A hit the floor",
+        "events": [
+          {
+            "t": 2.533,
+            "label": "Stepped on the duck",
+            "masked": true,
+            "q": 58.5
+          },
+          {
+            "t": 9,
+            "label": "Cup A hit the floor",
+            "masked": false,
+            "q": 115
+          }
+        ]
+      }
+    },
+    {
+      "name": "Skip the window",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 52,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 5.7,
+          "at_tick": 684,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 6,
+          "at_tick": 720,
+          "action": "release",
+          "sequence": 7
+        }
+      ],
+      "expected": {
+        "state": "lost",
+        "time": 10.15,
+        "caught": 1,
+        "noise": 120.52,
+        "hidden": 124.54,
+        "windowNoise": 84.4,
+        "peakWalker": 100.21,
+        "peakSleeper": 74.83,
+        "reason": "The walker woke. Window rattled",
+        "events": [
+          {
+            "t": 6,
+            "label": "Train released",
+            "masked": true,
+            "q": 9.28
+          },
+          {
+            "t": 9,
+            "label": "Cup A caught",
+            "masked": false,
+            "q": 5
+          }
+        ]
+      }
+    },
+    {
+      "name": "Start too early",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 52,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 3.5,
+          "at_tick": 420,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 3.6,
+          "at_tick": 432,
+          "action": "release",
+          "sequence": 7
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 8
+        },
+        {
+          "at_seconds": 12.66,
+          "at_tick": 1520,
+          "action": "release",
+          "sequence": 9
+        }
+      ],
+      "expected": {
+        "state": "lost",
+        "time": 9,
+        "caught": 0,
+        "noise": 195.5,
+        "hidden": 76.16,
+        "windowNoise": 0.4,
+        "peakWalker": 170.27,
+        "peakSleeper": 116.74,
+        "reason": "The walker woke. Cup A hit the floor",
+        "events": [
+          {
+            "t": 3.6,
+            "label": "Train released",
+            "masked": false,
+            "q": 58
+          },
+          {
+            "t": 9,
+            "label": "Cup A hit the floor",
+            "masked": false,
+            "q": 115
+          }
+        ]
+      }
+    },
+    {
+      "name": "Recover an early train",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 52,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 5.45,
+          "at_tick": 654,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 5.6,
+          "at_tick": 672,
+          "action": "release",
+          "sequence": 7
+        },
+        {
+          "at_seconds": 7.1,
+          "at_tick": 852,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 8
+        },
+        {
+          "at_seconds": 7.5,
+          "at_tick": 900,
+          "action": "release",
+          "sequence": 9
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 10
+        },
+        {
+          "at_seconds": 12.66,
+          "at_tick": 1520,
+          "action": "release",
+          "sequence": 11
+        }
+      ],
+      "expected": {
+        "state": "won",
+        "time": 15.008,
+        "caught": 2,
+        "noise": 69.85,
+        "hidden": 129.6,
+        "windowNoise": 0,
+        "peakWalker": 70.64,
+        "peakSleeper": 50.1,
+        "reason": "",
+        "events": [
+          {
+            "t": 5.6,
+            "label": "Train released",
+            "masked": true,
+            "q": 9.28
+          },
+          {
+            "t": 7.5,
+            "label": "Train restarted",
+            "masked": false,
+            "q": 32
+          },
+          {
+            "t": 9,
+            "label": "Cup A caught",
+            "masked": false,
+            "q": 5
+          },
+          {
+            "t": 12,
+            "label": "Cup B caught",
+            "masked": true,
+            "q": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "name": "Use the final snore",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 52,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 5.7,
+          "at_tick": 684,
+          "action": "select",
+          "object_id": "train",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 6,
+          "at_tick": 720,
+          "action": "release",
+          "sequence": 7
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 8
+        },
+        {
+          "at_seconds": 11.55,
+          "at_tick": 1386,
+          "action": "release",
+          "sequence": 9
+        }
+      ],
+      "expected": {
+        "state": "won",
+        "time": 15.008,
+        "caught": 2,
+        "noise": 46.18,
+        "hidden": 171.67,
+        "windowNoise": 50.4,
+        "peakWalker": 50.45,
+        "peakSleeper": 37.36,
+        "reason": "",
+        "events": [
+          {
+            "t": 6,
+            "label": "Train released",
+            "masked": true,
+            "q": 9.28
+          },
+          {
+            "t": 9,
+            "label": "Cup A caught",
+            "masked": false,
+            "q": 5
+          },
+          {
+            "t": 12,
+            "label": "Cup B caught",
+            "masked": true,
+            "q": 0.8
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cover only one landing",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 292,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 12.66,
+          "at_tick": 1520,
+          "action": "release",
+          "sequence": 7
+        }
+      ],
+      "expected": {
+        "state": "lost",
+        "time": 9,
+        "caught": 0,
+        "noise": 131.23,
+        "hidden": 75.29,
+        "windowNoise": 0.4,
+        "peakWalker": 112.18,
+        "peakSleeper": 79.24,
+        "reason": "The walker woke. Cup A hit the floor",
+        "events": [
+          {
+            "t": 9,
+            "label": "Cup A hit the floor",
+            "masked": false,
+            "q": 115
+          }
+        ]
+      }
+    },
+    {
+      "name": "Manual transfer during final snore",
+      "commands": [
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 0
+        },
+        {
+          "at_seconds": 0.15,
+          "at_tick": 18,
+          "action": "target",
+          "x": 172,
+          "y": 295,
+          "sequence": 1
+        },
+        {
+          "at_seconds": 1.35,
+          "at_tick": 162,
+          "action": "release",
+          "sequence": 2
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "select",
+          "object_id": "duck",
+          "sequence": 3
+        },
+        {
+          "at_seconds": 1.88,
+          "at_tick": 226,
+          "action": "target",
+          "x": 150,
+          "y": 383,
+          "sequence": 4
+        },
+        {
+          "at_seconds": 2.6,
+          "at_tick": 312,
+          "action": "release",
+          "sequence": 5
+        },
+        {
+          "at_seconds": 8.25,
+          "at_tick": 990,
+          "action": "select",
+          "object_id": "window",
+          "sequence": 6
+        },
+        {
+          "at_seconds": 11.55,
+          "at_tick": 1386,
+          "action": "release",
+          "sequence": 7
+        },
+        {
+          "at_seconds": 11.56,
+          "at_tick": 1388,
+          "action": "select",
+          "object_id": "pillow",
+          "sequence": 8
+        },
+        {
+          "at_seconds": 11.56,
+          "at_tick": 1388,
+          "action": "target",
+          "x": 292,
+          "y": 295,
+          "sequence": 9
+        },
+        {
+          "at_seconds": 12.15,
+          "at_tick": 1458,
+          "action": "release",
+          "sequence": 10
+        }
+      ],
+      "expected": {
+        "state": "won",
+        "time": 15.008,
+        "caught": 2,
+        "noise": 31.42,
+        "hidden": 123.64,
+        "windowNoise": 50.4,
+        "peakWalker": 32.42,
+        "peakSleeper": 25.68,
+        "reason": "",
+        "events": [
+          {
+            "t": 9,
+            "label": "Cup A caught",
+            "masked": false,
+            "q": 5
+          },
+          {
+            "t": 12,
+            "label": "Cup B caught",
+            "masked": true,
+            "q": 0.8
+          }
+        ]
+      }
+    }
+  ]
+}

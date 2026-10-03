@@ -1,0 +1,71 @@
+<div id="hush-hard-room" class="viz-dotted-background">
+ <style>
+  #hush-hard-room {width:100%;padding:10px 0;}
+  #hush-hard-room .hh-game {--paper:light-dark(#f5f0e7,#252c3b);--ink:light-dark(#293a49,#eceee5);--sub:light-dark(#647078,#b8c1c9);--track:light-dark(#dedfd6,#404b59);--button:light-dark(#29473f,#c9e5d1);--button-ink:light-dark(#f7f6ec,#233c35);--safe:light-dark(#467b67,#9bd8b9);--warn:light-dark(#ae7140,#f4c888);--bad:light-dark(#b24b52,#ff989e);width:min(100%,400px);margin:auto;box-sizing:border-box;border-radius:23px;overflow:hidden;background:var(--paper);color:var(--ink);font:14px/1.4 ui-sans-serif,system-ui,sans-serif;box-shadow:0 10px 35px #1623331c;}
+  #hush-hard-room .hh-head {padding:14px 15px 10px;}
+  #hush-hard-room .hh-name {padding-right:90px;display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;}
+  #hush-hard-room .hh-name strong {font-size:25px;letter-spacing:-1px;font-weight:500;}
+  #hush-hard-room .hh-name span {font-size:12px;color:var(--sub);}
+  #hush-hard-room .hh-meters {display:flex;gap:18px;margin-top:9px;}
+  #hush-hard-room .hh-meter {flex:1;min-width:0;}
+  #hush-hard-room .hh-label {display:flex;justify-content:space-between;gap:3px;font-size:12px;margin-bottom:4px;}
+  #hush-hard-room .hh-track {height:5px;overflow:hidden;border-radius:5px;background:var(--track);}
+  #hush-hard-room .hh-fill {height:100%;width:18%;background:var(--safe);}
+  #hush-hard-room .hh-beat {padding:9px 15px;display:flex;justify-content:space-between;gap:8px;font-size:12px;background:var(--track);}
+  #hush-hard-room .hh-beat[data-active="true"] {background:var(--button);color:var(--button-ink);}
+  #hush-hard-room .hh-stage {position:relative;width:100%;aspect-ratio:400/474;background:#273548;touch-action:none;user-select:none;}
+  #hush-hard-room canvas {display:block;width:100%;height:100%;}
+  #hush-hard-room .hh-obj {position:absolute;transform:translate(-50%,-50%);width:max(48px,14%);height:max(48px,12%);border:0;padding:0;background:transparent;color:inherit;border-radius:10px;touch-action:none;}
+  #hush-hard-room .hh-obj:disabled {pointer-events:none;}
+  #hush-hard-room .hh-obj[data-object="window"] {width:19%;height:18%;min-width:48px;min-height:48px;}
+  #hush-hard-room .hh-sr {position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
+  #hush-hard-room .hh-foot {padding:10px 12px 12px;}
+  #hush-hard-room .hh-hand {display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--sub);margin-bottom:5px;}
+  #hush-hard-room .hh-status {min-height:34px;font-size:12px;margin:0 0 8px;}
+  #hush-hard-room .hh-controls {display:flex;gap:6px;}
+  #hush-hard-room .hh-control {font:500 12px/1.3 ui-sans-serif,system-ui,sans-serif;min-height:44px;padding:8px 10px;border:0;border-radius:10px;background:var(--track);color:var(--ink);}
+  #hush-hard-room .hh-go {flex:1;background:var(--button);color:var(--button-ink);}
+  #hush-hard-room .hh-control:disabled {opacity:.4;}
+  #hush-hard-room .hh-help {padding:12px 15px 14px;background:var(--track);font-size:12px;}
+  #hush-hard-room .hh-help p {margin:0 0 8px;}
+  #hush-hard-room .hh-help p:last-child {margin:0;}
+  #hush-hard-room .hh-hint {margin-top:8px;}
+  #hush-hard-room .hh-controls button[aria-pressed="true"] {background:var(--button);color:var(--button-ink);}
+ </style>
+ <div class="hh-game">
+  <div class="hh-head">
+   <div class="hh-name"><strong>Hush!</strong><span>The rattle room · Hard</span></div>
+   <div class="hh-meters">
+    <div class="hh-meter"><div class="hh-label"><span>Walker</span><span data-sleep="walker">Asleep</span></div><div class="hh-track" role="progressbar" aria-label="Walker restlessness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="18" data-meter="walker"><div class="hh-fill"></div></div></div>
+    <div class="hh-meter"><div class="hh-label"><span>Sleeper</span><span data-sleep="sleeper">Asleep</span></div><div class="hh-track" role="progressbar" aria-label="Sleeper restlessness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="18" data-meter="sleeper"><div class="hh-fill"></div></div></div>
+   </div>
+  </div>
+  <div class="hh-beat" data-beat data-active="false"><span data-beat-text>Next snore · 1.8 s</span><span data-clock>24 s limit</span></div>
+  <div class="hh-stage">
+   <canvas role="img" aria-label="A room with a sleeper, a sleepwalker, two unstable cups, a toy train, a cushion, a squeaky duck, and a rattling window. One object can be held at a time."></canvas>
+   <button type="button" class="hh-obj cursor-interaction" data-object="pillow" aria-label="Cushion. Drag onto the train, below a cup, or into the window. Arrow keys also move it." disabled><span class="hh-sr">Cushion</span></button>
+   <button type="button" class="hh-obj cursor-interaction" data-object="duck" aria-label="Duck. Drag out of the walker’s path. Arrow keys also move it." disabled><span class="hh-sr">Duck</span></button>
+   <button type="button" class="hh-obj cursor-interaction" data-object="train" aria-label="Train engine. Hold to brake. Release to start. Space bar also holds it." disabled><span class="hh-sr">Train</span></button>
+   <button type="button" class="hh-obj cursor-interaction" data-object="cupA" aria-label="Cup A. Hold before it falls to steady it. Space bar also holds it." disabled><span class="hh-sr">Cup A</span></button>
+   <button type="button" class="hh-obj cursor-interaction" data-object="cupB" aria-label="Cup B. Hold before it falls to steady it. Space bar also holds it." disabled><span class="hh-sr">Cup B</span></button>
+   <button type="button" class="hh-obj cursor-interaction" data-object="window" aria-label="Window. Hold shut during the gust, or wedge it with the cushion. Space bar also holds it." disabled><span class="hh-sr">Window</span></button>
+  </div>
+  <div class="hh-foot">
+   <div class="hh-hand"><span data-hand>Hand free</span><span data-catches>0 / 2 cups saved</span></div>
+   <p class="hh-status" data-status role="status" aria-live="polite">Drag the cushion and duck. Hold the engine, cups or window.</p>
+   <div class="hh-controls">
+    <button type="button" class="hh-control hh-go cursor-interaction" data-start>Start</button>
+    <button type="button" class="hh-control cursor-interaction" data-pause disabled>Pause</button>
+    <button type="button" class="hh-control cursor-interaction" data-help aria-expanded="false">Help</button>
+    <button type="button" class="hh-control cursor-interaction" data-sound aria-pressed="false">Sound off</button>
+   </div>
+  </div>
+  <div class="hh-help" data-help-panel hidden>
+   <p><strong>One finger:</strong> drag the cushion or duck. Hold the engine to brake; release to run. Hold a cup before it falls, or hold the window shut.</p>
+   <p><strong>Snore:</strong> small noises are quieter while the top strip says SNOOORE. Large crashes still matter.</p>
+   <p><strong>Cushion:</strong> drop it on the carriage to ride, beneath a cup to catch, or in the window to wedge it.</p>
+   <button type="button" class="hh-control hh-hint cursor-interaction" data-hint>Show a hint</button>
+   <p data-hint-text hidden>The carriage takes about 3 seconds to reach A. Load it early, then choose a snore for the launch. Your hand will be needed at the window.</p>
+  </div>
+ </div>
+</div>

@@ -1,0 +1,749 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/hush/level-v1.schema.json",
+  "title": "Hush hard reference level contract",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "ruleset": {
+      "const": "prototype_v1"
+    },
+    "name_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "chapter": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "world": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 1
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    },
+    "clock": {
+      "type": "object",
+      "properties": {
+        "hz": {
+          "const": 120
+        },
+        "finish_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "deadline_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "autonomous_scale": {
+          "const": 1
+        }
+      },
+      "required": [
+        "hz",
+        "finish_seconds",
+        "deadline_seconds",
+        "autonomous_scale"
+      ],
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "max_active_gameplay_pointers": {
+          "const": 1
+        },
+        "max_drag_speed": {
+          "type": "number",
+          "minimum": 1
+        },
+        "follow_tau_seconds": {
+          "type": "number",
+          "minimum": 0.001
+        }
+      },
+      "required": [
+        "max_active_gameplay_pointers",
+        "max_drag_speed",
+        "follow_tau_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "noise": {
+      "type": "object",
+      "properties": {
+        "distance_scale": {
+          "type": "number",
+          "minimum": 0.001
+        },
+        "cover_combine": {
+          "const": "strongest_only"
+        }
+      },
+      "required": [
+        "distance_scale",
+        "cover_combine"
+      ],
+      "additionalProperties": false
+    },
+    "listeners": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/listener"
+      },
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "walker": {
+      "type": "object",
+      "properties": {
+        "listener_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/waypoint"
+          },
+          "minItems": 2
+        }
+      },
+      "required": [
+        "listener_id",
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "cover_windows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cover"
+      },
+      "minItems": 0
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/duck"
+          },
+          {
+            "$ref": "#/$defs/cushion"
+          },
+          {
+            "$ref": "#/$defs/train"
+          },
+          {
+            "$ref": "#/$defs/cup"
+          },
+          {
+            "$ref": "#/$defs/window"
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 6
+    },
+    "completion": {
+      "type": "object",
+      "properties": {
+        "required_cup_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+          },
+          "minItems": 0
+        },
+        "required_window_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+          },
+          "minItems": 0
+        },
+        "require_hand_free": {
+          "const": true
+        },
+        "require_train_docked": {
+          "const": false
+        }
+      },
+      "required": [
+        "required_cup_ids",
+        "required_window_ids",
+        "require_hand_free",
+        "require_train_docked"
+      ],
+      "additionalProperties": false
+    },
+    "mastery": {
+      "type": "object",
+      "properties": {
+        "peak_below": {
+          "type": "number",
+          "minimum": 0
+        },
+        "all_cups_caught": {
+          "const": true
+        },
+        "duck_not_stepped": {
+          "const": true
+        },
+        "no_hint": {
+          "const": true
+        }
+      },
+      "required": [
+        "peak_below",
+        "all_cups_caught",
+        "duck_not_stepped",
+        "no_hint"
+      ],
+      "additionalProperties": false
+    },
+    "hint_keys": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "ruleset",
+    "name_key",
+    "chapter",
+    "order",
+    "world",
+    "clock",
+    "input",
+    "noise",
+    "listeners",
+    "walker",
+    "cover_windows",
+    "objects",
+    "completion",
+    "mastery",
+    "hint_keys",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "vec": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    },
+    "bounds": {
+      "type": "object",
+      "properties": {
+        "min_x": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_x": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_y": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_y": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "min_x",
+        "max_x",
+        "min_y",
+        "max_y"
+      ],
+      "additionalProperties": false
+    },
+    "interval": {
+      "type": "object",
+      "properties": {
+        "start_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "start_seconds",
+        "end_seconds"
+      ],
+      "additionalProperties": false
+    },
+    "listener": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "initial_alert": {
+          "type": "number",
+          "minimum": 0
+        },
+        "wake_at": {
+          "type": "number",
+          "minimum": 0
+        },
+        "recovery_floor": {
+          "type": "number",
+          "minimum": 0
+        },
+        "quiet_delay_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "recovery_per_second": {
+          "type": "number",
+          "minimum": 0
+        },
+        "meaningful_gain_epsilon": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "position",
+        "initial_alert",
+        "wake_at",
+        "recovery_floor",
+        "quiet_delay_seconds",
+        "recovery_per_second",
+        "meaningful_gain_epsilon"
+      ],
+      "additionalProperties": false
+    },
+    "waypoint": {
+      "type": "object",
+      "properties": {
+        "at_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        }
+      },
+      "required": [
+        "at_seconds",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    "cover": {
+      "type": "object",
+      "properties": {
+        "start_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_seconds": {
+          "type": "number",
+          "minimum": 0
+        },
+        "listener_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "ordinary_multiplier": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "crash_multiplier": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "start_seconds",
+        "end_seconds",
+        "listener_ids",
+        "ordinary_multiplier",
+        "crash_multiplier"
+      ],
+      "additionalProperties": false
+    },
+    "duck": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "kind": {
+          "const": "duck"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "move_bounds": {
+              "$ref": "#/$defs/bounds"
+            },
+            "scrape_base": {
+              "type": "number",
+              "minimum": 0
+            },
+            "scrape_speed_divisor": {
+              "type": "number",
+              "minimum": 0.001
+            },
+            "scrape_factor": {
+              "type": "number",
+              "minimum": 0
+            },
+            "contact_radius": {
+              "type": "number",
+              "minimum": 0
+            },
+            "contact_after_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "contact_noise": {
+              "type": "number",
+              "minimum": 0
+            },
+            "nudge_x": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "move_bounds",
+            "scrape_base",
+            "scrape_speed_divisor",
+            "scrape_factor",
+            "contact_radius",
+            "contact_after_seconds",
+            "contact_noise",
+            "nudge_x"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "cushion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "kind": {
+          "const": "cushion"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "move_bounds": {
+              "$ref": "#/$defs/bounds"
+            },
+            "noise_per_unit": {
+              "type": "number",
+              "minimum": 0
+            },
+            "catch_half_width": {
+              "type": "number",
+              "minimum": 0
+            },
+            "catch_half_height": {
+              "type": "number",
+              "minimum": 0
+            },
+            "catch_y": {
+              "type": "number",
+              "minimum": 0
+            },
+            "catch_noise": {
+              "type": "number",
+              "minimum": 0
+            },
+            "window_snap_radius": {
+              "type": "number",
+              "minimum": 0
+            },
+            "carrier_snap_radius": {
+              "type": "number",
+              "minimum": 0
+            },
+            "window_offset": {
+              "$ref": "#/$defs/vec"
+            }
+          },
+          "required": [
+            "move_bounds",
+            "noise_per_unit",
+            "catch_half_width",
+            "catch_half_height",
+            "catch_y",
+            "catch_noise",
+            "window_snap_radius",
+            "carrier_snap_radius",
+            "window_offset"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "train": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "kind": {
+          "const": "train"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "speed": {
+              "type": "number",
+              "minimum": 0
+            },
+            "dock_x": {
+              "type": "number",
+              "minimum": 0
+            },
+            "engine_offset_x": {
+              "type": "number",
+              "minimum": 0
+            },
+            "release_noise_first": {
+              "type": "number",
+              "minimum": 0
+            },
+            "release_noise_restart": {
+              "type": "number",
+              "minimum": 0
+            },
+            "rolling_noise_per_second": {
+              "type": "number",
+              "minimum": 0
+            },
+            "release_noise_offset_x": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "speed",
+            "dock_x",
+            "engine_offset_x",
+            "release_noise_first",
+            "release_noise_restart",
+            "rolling_noise_per_second",
+            "release_noise_offset_x"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "cup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "kind": {
+          "const": "cup"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "trigger_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "pre_tip_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "fall_seconds": {
+              "type": "number",
+              "minimum": 0
+            },
+            "landing": {
+              "$ref": "#/$defs/vec"
+            },
+            "crash_noise": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "trigger_seconds",
+            "pre_tip_seconds",
+            "fall_seconds",
+            "landing",
+            "crash_noise"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "params"
+      ],
+      "additionalProperties": false
+    },
+    "window": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "kind": {
+          "const": "window"
+        },
+        "position": {
+          "$ref": "#/$defs/vec"
+        },
+        "params": {
+          "type": "object",
+          "properties": {
+            "gusts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/interval"
+              },
+              "minItems": 1
+            },
+            "noise_per_second": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "gusts",
+            "noise_per_second"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "position",
+        "params"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

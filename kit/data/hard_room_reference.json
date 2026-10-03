@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "id": "hard_room_reference",
+  "revision": 1,
+  "ruleset": "prototype_v1",
+  "name_key": "level.hard_reference.name",
+  "chapter": 0,
+  "order": 0,
+  "world": {
+    "width": 400,
+    "height": 474
+  },
+  "clock": {
+    "hz": 120,
+    "finish_seconds": 15,
+    "deadline_seconds": 24,
+    "autonomous_scale": 1
+  },
+  "input": {
+    "max_active_gameplay_pointers": 1,
+    "max_drag_speed": 360,
+    "follow_tau_seconds": 0.035
+  },
+  "noise": {
+    "distance_scale": 300,
+    "cover_combine": "strongest_only"
+  },
+  "listeners": [
+    {
+      "id": "walker",
+      "position": {
+        "x": 68,
+        "y": 439
+      },
+      "initial_alert": 18,
+      "wake_at": 100,
+      "recovery_floor": 12,
+      "quiet_delay_seconds": 1.6,
+      "recovery_per_second": 1.3,
+      "meaningful_gain_epsilon": 0.001
+    },
+    {
+      "id": "sleeper",
+      "position": {
+        "x": 343,
+        "y": 89
+      },
+      "initial_alert": 18,
+      "wake_at": 100,
+      "recovery_floor": 12,
+      "quiet_delay_seconds": 1.6,
+      "recovery_per_second": 1.3,
+      "meaningful_gain_epsilon": 0.001
+    }
+  ],
+  "walker": {
+    "listener_id": "walker",
+    "path": [
+      {
+        "at_seconds": 0,
+        "position": {
+          "x": 68,
+          "y": 439
+        }
+      },
+      {
+        "at_seconds": 1.4,
+        "position": {
+          "x": 68,
+          "y": 439
+        }
+      },
+      {
+        "at_seconds": 8,
+        "position": {
+          "x": 68,
+          "y": 217
+        }
+      },
+      {
+        "at_seconds": 12.7,
+        "position": {
+          "x": 333,
+          "y": 217
+        }
+      },
+      {
+        "at_seconds": 14.96923076923077,
+        "position": {
+          "x": 333,
+          "y": 99
+        }
+      }
+    ]
+  },
+  "cover_windows": [
+    {
+      "start_seconds": 1.8,
+      "end_seconds": 3.25,
+      "listener_ids": [
+        "walker",
+        "sleeper"
+      ],
+      "ordinary_multiplier": 0.16,
+      "crash_multiplier": 0.65
+    },
+    {
+      "start_seconds": 5.5,
+      "end_seconds": 6.8,
+      "listener_ids": [
+        "walker",
+        "sleeper"
+      ],
+      "ordinary_multiplier": 0.16,
+      "crash_multiplier": 0.65
+    },
+    {
+      "start_seconds": 11.5,
+      "end_seconds": 12.8,
+      "listener_ids": [
+        "walker",
+        "sleeper"
+      ],
+      "ordinary_multiplier": 0.16,
+      "crash_multiplier": 0.65
+    }
+  ],
+  "objects": [
+    {
+      "id": "duck",
+      "kind": "duck",
+      "position": {
+        "x": 68,
+        "y": 370
+      },
+      "params": {
+        "move_bounds": {
+          "min_x": 31,
+          "max_x": 369,
+          "min_y": 330,
+          "max_y": 438
+        },
+        "scrape_base": 0.11,
+        "scrape_speed_divisor": 420,
+        "scrape_factor": 1.4,
+        "contact_radius": 31,
+        "contact_after_seconds": 0.7,
+        "contact_noise": 90,
+        "nudge_x": 32
+      }
+    },
+    {
+      "id": "pillow",
+      "kind": "cushion",
+      "position": {
+        "x": 292,
+        "y": 400
+      },
+      "params": {
+        "move_bounds": {
+          "min_x": 28,
+          "max_x": 372,
+          "min_y": 70,
+          "max_y": 445
+        },
+        "noise_per_unit": 0.018,
+        "catch_half_width": 32,
+        "catch_half_height": 25,
+        "catch_y": 295,
+        "catch_noise": 5,
+        "window_snap_radius": 51,
+        "carrier_snap_radius": 43,
+        "window_offset": {
+          "x": 0,
+          "y": 21
+        }
+      }
+    },
+    {
+      "id": "train",
+      "kind": "train",
+      "position": {
+        "x": 52,
+        "y": 295
+      },
+      "params": {
+        "speed": 40,
+        "dock_x": 307,
+        "engine_offset_x": 67,
+        "release_noise_first": 58,
+        "release_noise_restart": 32,
+        "rolling_noise_per_second": 0.8,
+        "release_noise_offset_x": 35
+      }
+    },
+    {
+      "id": "cupA",
+      "kind": "cup",
+      "position": {
+        "x": 172,
+        "y": 183
+      },
+      "params": {
+        "trigger_seconds": 7.4,
+        "pre_tip_seconds": 0.95,
+        "fall_seconds": 0.65,
+        "landing": {
+          "x": 172,
+          "y": 295
+        },
+        "crash_noise": 115
+      }
+    },
+    {
+      "id": "cupB",
+      "kind": "cup",
+      "position": {
+        "x": 292,
+        "y": 183
+      },
+      "params": {
+        "trigger_seconds": 10.4,
+        "pre_tip_seconds": 0.95,
+        "fall_seconds": 0.65,
+        "landing": {
+          "x": 292,
+          "y": 295
+        },
+        "crash_noise": 115
+      }
+    },
+    {
+      "id": "window",
+      "kind": "window",
+      "position": {
+        "x": 50,
+        "y": 91
+      },
+      "params": {
+        "gusts": [
+          {
+            "start_seconds": 8.4,
+            "end_seconds": 12.6
+          }
+        ],
+        "noise_per_second": 48
+      }
+    }
+  ],
+  "completion": {
+    "required_cup_ids": [
+      "cupA",
+      "cupB"
+    ],
+    "required_window_ids": [
+      "window"
+    ],
+    "require_hand_free": true,
+    "require_train_docked": false
+  },
+  "mastery": {
+    "peak_below": 60,
+    "all_cups_caught": true,
+    "duck_not_stepped": true,
+    "no_hint": true
+  },
+  "hint_keys": [
+    "level.hard_reference.hint_1",
+    "level.hard_reference.hint_2"
+  ],
+  "notes": [
+    "Reference JS uses pillow as object ID and cushion as production kind.",
+    "Half-open cover/gust intervals. Catch and snap distances are strict inequalities.",
+    "Reference renderer payload ownership is replaced by production attachment rules.",
+    "Mastery is proposed production data, not implemented by the reference JS.",
+    "Path clamps at final waypoint; fractional endpoint time is evaluated at fixed steps."
+  ]
+}
